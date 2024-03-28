@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Information</title>
+<script>
+    function processForm() {
+        // Get user input
+        const name = document.getElementById('name').value;
+        const age = parseInt(document.getElementById('age').value);
+        const hometown = document.getElementById('hometown').value;
+
+        // Calculate birth year based on current year and age
+        const currentYear = new Date().getFullYear();
+        const birthYear = currentYear - age;
+
+        // Display user's name and birth year
+        document.getElementById('result').innerHTML = 'Hello, ' + name + '! You were born in ' + birthYear + '.<br>';
+
+        // Display link to search results for hometown
+        document.getElementById('result').innerHTML += '<a href="https://www.google.com/search?q=' + hometown + '" target="_blank">Search ' + hometown + ' on Google</a>';
+    }
+</script>
+</head>
+<body>
+<h2>User Information Form</h2>
+
+<form onsubmit="processForm(); return false;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" required><br><br>
+
+    <label for="hometown">Hometown:</label><br>
+    <input type="text" id="hometown" name="hometown" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<div id="result"></div>
+
+</body>
+</html>

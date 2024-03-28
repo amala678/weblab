@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sort Names</title>
+</head>
+<body>
+<h2>Enter Names (Cancel to Finish)</h2>
+
+<script>
+    const names = [];
+    let name;
+
+    // Prompt user for names until cancel is clicked
+    while (true) {
+        name = prompt('Enter a name:');
+        if (name === null) {
+            break; // Exit loop if cancel button is clicked
+        }
+        names.push(name);
+    }
+
+    // Sort the names in alphabetical order
+    names.sort();
+
+    // Print the sorted names in an ordered list
+    document.write('<ol>');
+    for (let i = 0; i < names.length; i++) {
+        document.write('<li>' + names[i] + '</li>');
+    }
+    document.write('</ol>');
+</script>
+
+</body>
+</html>

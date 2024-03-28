@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+<h2>Registration Form</h2>
+
+<form id="registrationForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="username">User Name:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="confirmPassword">Confirm Password:</label><br>
+    <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+    <label for="yearOfBirth">Year of Birth:</label><br>
+    <input type="text" id="yearOfBirth" name="yearOfBirth" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <input type="checkbox" id="agree" name="agree" required>
+    <label for="agree">I agree to the terms and conditions</label><br><br>
+
+    <input type="submit" value="Register">
+</form>
+
+<div id="errorMessages" class="error"></div>
+
+<script>
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const yearOfBirth = document.getElementById('yearOfBirth').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const agree = document.getElementById('agree').checked;
+
+        let errorMessage = '';
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            errorMessage += 'Password and Confirm Password do not match.<br>';
+        }
+
+        // Check if fields are empty
+        if (name === '' || username === '' || password === '' || confirmPassword === '' || yearOfBirth === '' || email === '' || !agree) {
+            errorMessage += 'All fields are required.<br>';
+        }
+
+        // Check if year of birth is valid
+        const currentYear = new Date().getFullYear();
+        if (yearOfBirth.length !== 4 || isNaN(yearOfBirth) || yearOfBirth < 1900 || yearOfBirth > currentYear) {
+            errorMessage += 'Year of Birth should be a four-digit number between 1900 and ' + currentYear + '.<br>';
+        }
+
+        // Check if email is valid
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            errorMessage += 'Invalid email format.<br>';
+        }
+
+        // Display error message or submit form
+        const errorMessages = document.getElementById('errorMessages');
+        if (errorMessage !== '') {
+            errorMessages.innerHTML = errorMessage;
+            return false;
+        } else {
+            errorMessages.innerHTML = '';
+            return true;
+        }
+    }
+</script>
+
+</body>
+</html>
